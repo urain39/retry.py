@@ -9,8 +9,8 @@ def retry_when(errors):
                )
               )
 
-@retry_when(ZeroDivisionError)
+@retry_when((ZeroDivisionError, IndexError,))
 def _():
-  return 0/0
+  print([1, 2, 3, 4][0xff])
 
 _()

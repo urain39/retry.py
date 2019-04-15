@@ -1,8 +1,8 @@
 from functools import wraps
 
-def retry(error, max_count=3, callback=None):
+def retry(errors, max_count=3, callback=None):
   """
-  @param error: any class which based on `Exception`
+  @param errors: any class which based on `Exception`
   @param max_count: optional, the max retry count
   @param callback: optional, be called with `retry count` before retry
 
@@ -34,9 +34,11 @@ def retry(error, max_count=3, callback=None):
           result = fn(*args, **kwargs)
           break
         # pylint: disable=invalid-name
-        except error as e:
+        except errors as e:
+          # if count <= max_count
           if count[0] <= max_count:
             if callable(callback):
+              # callback(count)
               callback(count[0])
             continue
           else:

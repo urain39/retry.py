@@ -1,8 +1,8 @@
 from time import sleep
 from retry import retry
 
-def retry_when(error):
-  return retry(error, 3,
+def retry_when(errors):
+  return retry(errors, 3,
                lambda cnt: (
                  print("sleep 10s"),
                  sleep(10)

@@ -1,29 +1,29 @@
 # Retry lib
 A simple retry lib for Python.
 
-Usage
+> DocString  
+>   """  
+>  @param errors: any class which based on `Exception`  
+>  @param max_count: optional, the max retry count  
+>  @param callback: optional, be called with `retry count` before retry  
+>  
+>  Examples:  
+>    @retry(ZeroDivisionError, 3,  
+>           lambda cnt: print(cnt))  
+>    def _():  
+>      0/0  
+>  
+>    _()  
+>  """  
+
+## Usage
+
 ```py
 from time import sleep
 from retry import retry
 
-
-  """
-  @param error: any class which based on `Exception`
-  @param max_count: optional, the max retry count
-  @param callback: optional, be called with `retry count` before retry
-
-  Examples:
-    @retry(ZeroDivisionError, 3,
-           lambda cnt: print(cnt))
-    def _():
-      0/0
-
-    _()
-  """
-
-
-def retry_when(error):
-  return retry(error, 3,
+def retry_when(errors):
+  return retry(errors, 3,
                lambda cnt: (
                  print("sleep 10s"),
                  sleep(10)
@@ -33,6 +33,25 @@ def retry_when(error):
 @retry_when(ZeroDivisionError)
 def _():
   return 0/0
+
+_()
+```
+
+```py
+from time import sleep
+from retry import retry
+
+def retry_when(errors):
+  return retry(errors, 3,
+               lambda cnt: (
+                 print("sleep 10s"),
+                 sleep(10)
+               )
+              )
+
+@retry_when((ZeroDivisionError, IndexError,))
+def _():
+  print([1, 2, 3, 4][0xff])
 
 _()
 ```
