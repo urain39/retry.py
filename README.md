@@ -7,9 +7,9 @@ from time import sleep
 from retry import retry
 
 
-"""
+  """
   @param error: any class which based on `Exception`
-  @param max_count: optional, by default it is 3
+  @param max_count: optional, the max retry count
   @param callback: optional, be called with `retry count` before retry
 
   Examples:
@@ -19,7 +19,7 @@ from retry import retry
       0/0
 
     _()
-"""
+  """
 
 
 def retry_when(error):

@@ -3,7 +3,7 @@ from functools import wraps
 def retry(error, max_count=3, callback=None):
   """
   @param error: any class which based on `Exception`
-  @param max_count: optional, by default it is 3
+  @param max_count: optional, the max retry count
   @param callback: optional, be called with `retry count` before retry
 
   Examples:
