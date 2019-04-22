@@ -9,7 +9,7 @@ A simple retry lib for Python.
 >  
 >  Examples:  
 >    @retry(ZeroDivisionError, 3,  
->           lambda cnt: print(cnt))  
+>           lambda cnt, err: print(cnt))  
 >    def _():  
 >      0/0  
 >  
@@ -24,7 +24,7 @@ from retry import retry
 
 def retry_when(errors):
   return retry(errors, 3,
-               lambda cnt: (
+               lambda cnt, err: (
                  print("sleep 10s"),
                  sleep(10)
                )
@@ -43,7 +43,7 @@ from retry import retry
 
 def retry_when(errors):
   return retry(errors, 3,
-               lambda cnt: (
+               lambda cnt, err: (
                  print("sleep 10s"),
                  sleep(10)
                )
