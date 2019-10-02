@@ -9,7 +9,7 @@ A simple retry lib for Python.
 >  
 >  Examples:  
 >    @retry(ZeroDivisionError, 3,  
->           lambda cnt, err: print(cnt))  
+>           lambda err, cnt: print(cnt))  
 >    def _():  
 >      0/0  
 >  
@@ -24,7 +24,7 @@ from retry import retry
 
 def retry_when(errors):
   return retry(errors, 3,
-               lambda cnt, err: (
+               lambda err, cnt: (
                  print("sleep 10s"),
                  sleep(10)
                )
@@ -43,7 +43,7 @@ from retry import retry
 
 def retry_when(errors):
   return retry(errors, 3,
-               lambda cnt, err: (
+               lambda err, cnt: (
                  print("sleep 10s"),
                  sleep(10)
                )
@@ -55,3 +55,26 @@ def _():
 
 _()
 ```
+
+## How to decorate a method with private members?
+
+To decorate with private members you must call decorator
+manually in `CLASS.__init__`, like following style:
+
+```py
+
+class Dog():
+    def __init__(self, name):
+	self._name = name
+
+        def print_name():
+            print(self._name)
+
+        # Call decorator manually
+        self.say = awesome_decorator(callback=print_name)(self.say)
+
+   def say(self):
+       print('Woof! Woof! Woof!')
+
+```
+

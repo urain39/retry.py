@@ -140,10 +140,11 @@ disable=print-statement,
         exception-escape,
         comprehension-escape,
         missing-docstring,
-        line-too-long,
+        fixme,
+        invalid-name,
         useless-object-inheritance,
-        too-few-public-methods,
-        no-self-use
+        bad-continuation,
+        method-hidden  # To debug we need manual decorate methods.
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -311,7 +312,7 @@ indent-after-paren=2
 
 # String used as indentation unit. This is usually "    " (4 spaces) or "\t" (1
 # tab).
-indent-string='  '
+indent-string='    '
 
 # Maximum number of characters on a single line.
 max-line-length=100
