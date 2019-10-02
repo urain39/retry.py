@@ -9,7 +9,7 @@ def retry(errors, max_count=3, callback=None):
 
     Examples:
         @retry(ZeroDivisionError, 3,
-            lambda err, cnt: print(err, cnt))
+               lambda err, cnt: print(err, cnt))
         def _():
             0/0
 
